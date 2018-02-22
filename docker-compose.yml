@@ -1,12 +1,16 @@
 ---
-version: '3'
+version: '2'
 services:
 
-    master:
-      build: jenkins-master
-      
-      image: edg-jenkins-master
-      container_name: edg-jenkins
-      ports:
-        - "50000:50000"
-        - "8080:8080"
+  data:
+    build: jenkins-data
+  
+  master:
+    build: jenkins-master
+    image: edg-jenkins-master
+    container_name: edg-jenkins
+    volumes_from:
+      - data
+    ports:
+      - "50000:50000"
+      - "8080:8080"
